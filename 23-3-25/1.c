@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 void FindSingle(float*arr,int storage,float*p1,float*p2);//以排好序的数组arr，数组容量storage
