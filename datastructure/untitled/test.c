@@ -94,10 +94,42 @@ void ListPushFront(ListNode* pHead, LTDataType x)
 void ListPopFront(ListNode* pHead)
 {
     assert(pHead);
+    assert(!ListisEmpty(pHead));
     ListNode *target=pHead->_next;
     target->_next->_prev=pHead;
     pHead->_next=target->_next;
     free(target);
 }
 
+// 双向链表查找
+ListNode* ListFind(ListNode* pHead, LTDataType x)
+{
+    assert(pHead);
+    ListNode *cur=pHead->_next;
+    while (cur!=pHead)
+    {
+        if(cur->_data==x)
+            return cur;
+        cur=cur->_next;
+    }
+    return NULL;
+}
 
+// 双向链表在pos的前面进行插入
+void ListInsert(ListNode* pos, LTDataType x)
+{
+    ListNode *newnode= BuyNode(x);
+    newnode->_next=pos;
+    newnode->_prev=pos->_prev;
+    pos->_prev->_next=newnode;
+    pos->_prev=newnode;
+}
+
+// 双向链表删除pos位置的节点
+void ListErase(ListNode* pos)
+{
+    assert(pos);
+    pos->_prev->_next=pos->_next;
+    pos->_next->_prev=pos->_prev;
+    free(pos);
+}
