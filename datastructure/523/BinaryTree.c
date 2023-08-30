@@ -1,5 +1,4 @@
 #include "BinaryTree.h"
-#include "Queue.h"
 //申请节点
 BTNode *BuyNode(BTDataType val)
 {
@@ -168,7 +167,41 @@ void BinaryTreeLevelOrder(BTNode* root)
 // 判断二叉树是否是完全二叉树
 int BinaryTreeComplete(BTNode* root)
 {
+    //层序遍历，遇到空节点停止
+    //查空节点后的叶子节点
+    Queue q;
+    QueueInit(&q);
 
+    if (root)
+        QueuePush(&q, root);
+
+    //层序遍历
+    while (!QueueEmpty(&q))
+    {
+        QDatatype front= QueueFront(&q);
+        QueuePop(&q);
+
+        if(front==NULL)
+            break;
+        QueuePush(&q,front->_left);
+        QueuePush(&q,front->_right);
+
+    }
+
+    while (!QueueEmpty(&q))
+    {
+        //检查后面是否非空，非空则不是完全二叉树
+        QDatatype front= QueueFront(&q);
+        QueuePop(&q);
+        if(front)
+        {
+            QueueDestroy(&q);
+            return false;
+        }
+
+    }
+    QueueDestroy(&q);
+    return true;
 }
 
 

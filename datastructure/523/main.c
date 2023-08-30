@@ -10,6 +10,11 @@ int main()
     printf("层序遍历：");
     BinaryTreeLevelOrder(root);
 
-    printf("二叉树层高：%d ", BTHeight(root));
+    printf("二叉树层高：%d \n", BTHeight(root));
+
+    if(BinaryTreeComplete(root))
+        printf("二叉树是完全二叉树\n");
+    else
+        printf("二叉树不是完全二叉树\n");
     return 0;
 }
